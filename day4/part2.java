@@ -14,8 +14,8 @@ public class part2 {
             boolean valid = true;
             StringBuilder sb = new StringBuilder();
 
-            while(true){
-                String line = sc.hasNextLine() ? sc.nextLine() : "";
+            while(sc.hasNextLine()){
+                String line = sc.nextLine();
                 if(line.equals(""))
                     break;
                 sb.append(line + " ");
@@ -26,11 +26,11 @@ public class part2 {
             
             if(valid)
                 stringlist.add(sb);
+        
         }
-
-        for(int i = 0; i < stringlist.size(); i++){
+        for(StringBuilder string : stringlist){
             boolean valid = true;
-            String[] fields = stringlist.get(i).toString().split(" ");
+            String[] fields = string.toString().split(" ");
 
             for(String field : fields){
                 String[] values = field.split(":");
@@ -39,7 +39,7 @@ public class part2 {
                 
                 switch(type){
                     case "byr":
-                        valid = val.matches("(19[2-9][0-9])|(2000)|(2001)|(2002)") ? valid : false;
+                        valid = val.matches("(19[2-9][0-9])|(200[0-2])") ? valid : false;
                         break;
 
                     case "iyr": 
