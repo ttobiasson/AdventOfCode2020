@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class part2 {
@@ -11,40 +10,33 @@ public class part2 {
         ArrayList<StringBuilder>stringlist = new ArrayList<StringBuilder>();
         int count = 0;
 
-        //eyr:2021 hgt:168cm hcl:#fffffd pid:180778832 byr:1923 ecl:amb iyr:2019 cid:241
         while(sc.hasNextLine()){
             boolean valid = true;
             StringBuilder sb = new StringBuilder();
+
             while(true){
                 String line = sc.hasNextLine() ? sc.nextLine() : "";
-                if(line.equals("")){
+                if(line.equals(""))
                     break;
-                }
-                sb.append(line);
-                sb.append(" ");
+                sb.append(line + " ");
             }
-            for(String s : strings){
-                if(sb.indexOf(s) == -1 && !s.equals("cid")){
-                    valid = false;
-                    break;
-                }
-            }
-            if(valid){
-                stringlist.add(sb);
-            }
+
+            for(String s : strings)
+                valid = sb.indexOf(s) == -1 && !s.equals("cid") ? false : valid;
             
+            if(valid)
+                stringlist.add(sb);
         }
 
         for(int i = 0; i < stringlist.size(); i++){
             boolean valid = true;
-            String toCheck = stringlist.get(i).toString();
-
-            String[] fields = toCheck.split(" ");
+            String[] fields = stringlist.get(i).toString().split(" ");
 
             for(String field : fields){
                 String[] values = field.split(":");
                 String type = values[0];
                 String val = values[1];
+                
                 switch(type){
                     case "byr":
                         valid = val.matches("(19[2-9][0-9])|(2000)|(2001)|(2002)") ? valid : false;
