@@ -29,7 +29,7 @@ public class part2 {
         for(List<String> list1  : list){
             if(list1.get(0).contains(bagToCheck) && !list1.get(1).contains("no other")){
                 for(int i = 1; i < list1.size(); i++){
-                    String newBagToCheck = list1.get(i).substring(2,list1.get(i).length());
+                    String newBagToCheck = list1.get(i).substring(2);
                     ans += Integer.valueOf(list1.get(i).substring(0,1)) * check(list, newBagToCheck);
                 }
             }      
