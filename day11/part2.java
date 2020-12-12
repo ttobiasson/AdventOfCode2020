@@ -14,7 +14,7 @@ public class part2 {
 
         while(true){
             newLines = calc(newLines);
-            long seats = getNumberOfOccupiedSeats(newLines);
+            long seats = getTotalNumberOfOccupiedSeats(newLines);
             if(seats == prev){
                 System.out.println(seats);
                 break;
@@ -58,7 +58,7 @@ public class part2 {
         
         return count;
     }
-    static long getNumberOfOccupiedSeats(List<String>lines){
+    static long getTotalNumberOfOccupiedSeats(List<String>lines){
         int count = 0;
                                 
         for(int i = 0; i < lines.size(); i++){
