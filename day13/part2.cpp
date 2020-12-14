@@ -36,7 +36,7 @@ int main(){
             minutes++;
     }
 
-    while(timestamp+=911>0){
+    while(timestamp++>0){
         bool allgood = true;
         for(int j = 0; j < v2.size(); j+=2){
             long long timeto = v2.at(j);
