@@ -46,37 +46,25 @@ public class part2 {
         }
         printMemorySum(memory);
     }
-    private static void printMemorySum(HashMap<Long, Integer> memory) {
-        BigInteger sum = BigInteger.ZERO;
-        for(long key : memory.keySet()){
-            sum = sum.add(BigInteger.valueOf(memory.get(key)));
+    private static void addBeginningZeros(char[] maskChars, char[] addressChars, List<Character> addressCharsWithZeros) {
+        for(int i = 0; i < maskChars.length-addressChars.length; i++){
+            addressCharsWithZeros.add('0');
         }
-        System.out.println(sum);
     }
     private static void addValueAfterZeros(char[] addressChars, List<Character> addressCharsWithZeros) {
         for(char c : addressChars){
             addressCharsWithZeros.add(c);
         }
     }
-    private static void addBeginningZeros(char[] maskChars, char[] addressChars, List<Character> addressCharsWithZeros) {
-        for(int i = 0; i < maskChars.length-addressChars.length; i++){
-            addressCharsWithZeros.add('0');
+    private static void buildAddressFromMask(List<Character> addressCharsWithZeros, char[] maskChars) {
+        for(int i = 0; i < addressCharsWithZeros.size(); i++){
+            if(maskChars[i] == '1')
+                addressCharsWithZeros.set(i, '1');
+            else if(maskChars[i] == 'X'){
+                addressCharsWithZeros.set(i, 'X');
+            }
         }
     }
-    private static void addValuesToAddressesInMemory(HashMap<Long, Integer> memory, List<String> mem, List<List<Character>> addresses) {
-        int value = Integer.valueOf(mem.get(1));
-
-        for(List<Character>address : addresses){
-            char[] chs = new char[address.size()];
-            for(int i = 0; i < chs.length; i++)
-                chs[i] = address.get(i);
-            String s = String.valueOf(chs);
-            
-            long key = Long.parseLong(s, 2);
-            memory.put(key, value);
-        }
-    }
-    
     private static void generateAddresses(List<Character> addressCharsWithZeros, List<List<Character>> addresses) {
         List<String>binarys = new ArrayList<String>();
         makeAllBinaryNumbers(addressCharsWithZeros, binarys);
@@ -93,6 +81,12 @@ public class part2 {
             }
             binarys.add(sb.toString()+bin);
         }
+    }
+    private static int countx(List<Character> addressCharsWithZerosList){
+        int count = 0;
+        for(char c : addressCharsWithZerosList)
+            count+= c == 'X' ? 1 : 0;
+        return count;
     }
     private static void makeAllPossibleAddresses(List<Character> addressCharsWithZeros, List<List<Character>> addresses,
             List<String> binarys) {
@@ -113,20 +107,24 @@ public class part2 {
             address = new ArrayList<Character>();
         }
     }
+    private static void addValuesToAddressesInMemory(HashMap<Long, Integer> memory, List<String> mem, List<List<Character>> addresses) {
+        int value = Integer.valueOf(mem.get(1));
 
-    private static void buildAddressFromMask(List<Character> addressCharsWithZeros, char[] maskChars) {
-        for(int i = 0; i < addressCharsWithZeros.size(); i++){
-            if(maskChars[i] == '1')
-                addressCharsWithZeros.set(i, '1');
-            else if(maskChars[i] == 'X'){
-                addressCharsWithZeros.set(i, 'X');
-            }
+        for(List<Character>address : addresses){
+            char[] chs = new char[address.size()];
+            for(int i = 0; i < chs.length; i++)
+                chs[i] = address.get(i);
+            String s = String.valueOf(chs);
+            
+            long key = Long.parseLong(s, 2);
+            memory.put(key, value);
         }
     }
-    private static int countx(List<Character> addressCharsWithZerosList){
-        int count = 0;
-        for(char c : addressCharsWithZerosList)
-            count+= c == 'X' ? 1 : 0;
-        return count;
+    private static void printMemorySum(HashMap<Long, Integer> memory) {
+        BigInteger sum = BigInteger.ZERO;
+        for(long key : memory.keySet()){
+            sum = sum.add(BigInteger.valueOf(memory.get(key)));
+        }
+        System.out.println(sum);
     }
 }
