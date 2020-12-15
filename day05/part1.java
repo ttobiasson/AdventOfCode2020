@@ -1,13 +1,14 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Iterator;
+//https://adventofcode.com/2020/day/5
 public class part1 {
-    public static void main(String... args) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("input.txt"));
+    public static void main(String... args) throws IOException {
+        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
         int max = 0;
-        while(sc.hasNextLine()){
-            char[] line = sc.nextLine().toCharArray();
+        while(iter.hasNext()){
+            char[] line = iter.next().toCharArray();
             int i = 0;
             int coli = 0;
             int range = 128;

@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 import java.util.stream.Collectors;
-
+//https://adventofcode.com/2020/day/10
 public class part1 {
     
     public static void main(String... args) throws IOException {

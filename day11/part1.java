@@ -3,8 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-
+//https://adventofcode.com/2020/day/11
 public class part1 {
     public static void main(String... args) throws IOException {
         List<String>lines = Files.readAllLines(Path.of("input.txt"));

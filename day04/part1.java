@@ -1,20 +1,23 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Iterator;
+//https://adventofcode.com/2020/day/4
 public class part1 {
-    public static void main(String... ags) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("day4/input.txt"));
+    public static void main(String... ags) throws IOException {
+        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        printValidPassports(iter);
+    }
+    private static void printValidPassports(Iterator<String> iter) {
         String[] strings = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"};
 
         int count = 0;
 
-        //eyr:2021 hgt:168cm hcl:#fffffd pid:180778832 byr:1923 ecl:amb iyr:2019 cid:241
-        while(sc.hasNextLine()){
+        while(iter.hasNext()){
             boolean valid = true;
             StringBuilder sb = new StringBuilder();
             while(true){
-                String line = sc.hasNextLine() ? sc.nextLine() : "";
+                String line = iter.hasNext() ? iter.next() : "";
                 if(line.equals("")){
                     break;
                 }

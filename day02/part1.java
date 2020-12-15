@@ -1,48 +1,32 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
-
+//https://adventofcode.com/2020/day/2
 public class part1 {
-    public static void main(String[] arg) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("input.txt"));
-        int valid = 0;
-        while(sc.hasNextLine()){
-            // 1-3 g: gggg
-            int count = 0;
-            int low = 0;
-            int high = 0;
-            char target;
-            String pwd = null;
-            String s = sc.nextLine().replace(":", "");
-            String[] part = s.split("-");
-            ArrayList<String>strings = new ArrayList<String>();
+    public static void main(String[] arg) throws IOException {
+        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        getValidPasswords(iter);
+    }
 
-            for(String p : part){
-                if(p.contains(" ")){
-                    for(String pp : p.split(" ")){
-                        strings.add(pp);
-                    }
-                }
-                else strings.add(p);
-                    
-            }
+    private static void getValidPasswords(Iterator<String> iter) {
+        int valid = 0;
+        while(iter.hasNext()){
+            String nextLine = iter.next();
+            String[] parts = nextLine.replace(":", "").split(" ");
+            String[] lowAndHigh = parts[0].split("-");
+        
+            int count = 0;
+            int low = Integer.parseInt(lowAndHigh[0]);
+            int high = Integer.parseInt(lowAndHigh[1]);
+            char target = parts[1].charAt(0);
+            String pwd = parts[2];
+          
+            for(char c : pwd.toCharArray())
+                count += c == target ? 1 : 0;
             
-            low = Integer.parseInt(strings.get(0));
-            high = Integer.parseInt(strings.get(1));
-            target = strings.get(2).charAt(0);
-            pwd = strings.get(3);
-            
-            for(char c : pwd.toCharArray()){
-                if(c == target)
-                    count++;
-            }
-            if(low <= count && count <= high){
-                valid++;
-            }
+            valid += (low <= count) && (count <= high) ? 1 : 0;
         }
         System.out.println(valid);
-
-
-
     }
 }

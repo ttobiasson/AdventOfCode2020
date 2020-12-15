@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
+//https://adventofcode.com/2020/day/14
 public class part1 {
     public static void main(String... args) throws IOException {
         Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();

@@ -4,11 +4,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
+//https://adventofcode.com/2020/day/8
 public class part2 {
     static int count = 0;
     public static void main(String... args) throws IOException {
         List<String> file = Files.readAllLines(Path.of("input.txt"));
+        printValueAfterTermination(file);
+    }
+    private static void printValueAfterTermination(List<String> file) {
         int index = 0;
         boolean terminate = false;
 

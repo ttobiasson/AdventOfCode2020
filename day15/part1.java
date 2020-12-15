@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+//https://adventofcode.com/2020/day/15
 public class part1 {
     public static void main(String... args) throws IOException {
         Scanner sc = new Scanner(new File("input.txt"));

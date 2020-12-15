@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
+//https://adventofcode.com/2020/day/14
 public class part2 {
     public static void main(String... args) throws IOException {
         Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
@@ -88,23 +88,21 @@ public class part2 {
             count+= c == 'X' ? 1 : 0;
         return count;
     }
-    private static void makeAllPossibleAddresses(List<Character> addressCharsWithZeros, List<List<Character>> addresses,
-            List<String> binarys) {
-        List<Character>address = new ArrayList<Character>();
-        for(int index = 0; index < binarys.size(); index++){
+    private static void makeAllPossibleAddresses(List<Character> addressCharsWithZeros, List<List<Character>> addresses, List<String> binarys) {
+        for(int i = 0; i < binarys.size(); i++){
+            List<Character>address = new ArrayList<Character>();
             int number = 0;
-            for(char c : addressCharsWithZeros)
-                address.add(c);
-            for(int i = 0; i < address.size(); i++){
-                char[] binary = binarys.get(index).toCharArray();
+
+            address.addAll(addressCharsWithZeros);
+            for(int j = 0; j < address.size(); j++){
+                char[] binary = binarys.get(i).toCharArray();
                 
-                if(address.get(i) == 'X'){
-                    address.set(i, binary[number]);
+                if(address.get(j) == 'X'){
+                    address.set(j, binary[number]);
                     number++;
                 }
             }
             addresses.add(address);
-            address = new ArrayList<Character>();
         }
     }
     private static void addValuesToAddressesInMemory(HashMap<Long, Integer> memory, List<String> mem, List<List<Character>> addresses) {
@@ -114,9 +112,9 @@ public class part2 {
             char[] chs = new char[address.size()];
             for(int i = 0; i < chs.length; i++)
                 chs[i] = address.get(i);
-            String s = String.valueOf(chs);
             
-            long key = Long.parseLong(s, 2);
+            String addressString = String.valueOf(chs);
+            long key = Long.parseLong(addressString, 2);
             memory.put(key, value);
         }
     }

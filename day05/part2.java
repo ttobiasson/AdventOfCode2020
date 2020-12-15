@@ -1,16 +1,17 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Iterator;
 import java.util.stream.IntStream;
 
 public class part2 {
-    public static void main(String... args) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("input.txt"));
+    public static void main(String... args) throws IOException {
+        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
         ArrayList<Integer>list = new ArrayList<Integer>();
 
-        while(sc.hasNextLine()){
-            char[] line = sc.nextLine().toCharArray();
+        while(iter.hasNext()){
+            char[] line = iter.next().toCharArray();
             int i = 0;
             int range = 128;
             int colrange = 8;
@@ -24,9 +25,7 @@ public class part2 {
                 colrange/=2;
             }
             list.add(i*8+coli);
-            
         }
         IntStream.range(23, 828).filter(n -> !list.contains(n)).forEach(System.out::println);
-        
     }
 }

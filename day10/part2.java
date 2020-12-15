@@ -3,7 +3,7 @@ import java.nio.file.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-
+//https://adventofcode.com/2020/day/10
 public class part2 {
     public static void main(String... args) throws IOException {
         List<Integer >numbers = Files.readAllLines(Path.of("input.txt"))

@@ -1,33 +1,21 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.Iterator;
+//https://adventofcode.com/2020/day/4
 public class part2 {
-    public static void main(String... ags) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("day4/input.txt"));
+    public static void main(String... ags) throws IOException {
+        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        printValidPasswords(iter);
+        
+    }
+    private static void printValidPasswords(Iterator<String> iter) {
         String[] strings = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"};
         ArrayList<StringBuilder>stringlist = new ArrayList<StringBuilder>();
         int count = 0;
+        filterInvalidPasswords(iter, strings, stringlist);
 
-        while(sc.hasNextLine()){
-            boolean valid = true;
-            StringBuilder sb = new StringBuilder();
-
-            while(sc.hasNextLine()){
-                String line = sc.nextLine();
-                if(line.equals(""))
-                    break;
-                sb.append(line + " ");
-            }
-
-            for(String s : strings)
-                valid = sb.indexOf(s) == -1 && !s.equals("cid") ? false : valid;
-            
-            if(valid)
-                stringlist.add(sb);
-        
-        }
         for(StringBuilder string : stringlist){
             boolean valid = true;
             String[] fields = string.toString().split(" ");
@@ -73,6 +61,24 @@ public class part2 {
             count += valid ? 1 : 0;
         }
         System.out.println(count);
-        
+    }
+    private static void filterInvalidPasswords(Iterator<String> iter, String[] strings, ArrayList<StringBuilder> stringlist) {
+        while(iter.hasNext()){
+            boolean valid = true;
+            StringBuilder sb = new StringBuilder();
+
+            while(iter.hasNext()){
+                String line = iter.next();
+                if(line.equals(""))
+                    break;
+                sb.append(line + " ");
+            }
+
+            for(String s : strings)
+                valid = sb.indexOf(s) == -1 && !s.equals("cid") ? false : valid;
+            
+            if(valid)
+                stringlist.add(sb);
+        }
     }
 }

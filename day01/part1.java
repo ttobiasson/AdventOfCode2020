@@ -1,20 +1,16 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-import java.util.ArrayList;
-
-public class part1{
-    public static void main(String...args) throws FileNotFoundException{
-        Scanner sc = new Scanner(new File("day1/input.txt"));
-        ArrayList<Integer>list = new ArrayList<Integer>();
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+//https://adventofcode.com/2020/day/1
+public class part1 {
+    public static void main(String... args) throws IOException {
+        List<String>numbers = Files.readAllLines(Path.of("input.txt"));
         
-        while(sc.hasNextInt())
-            list.add(sc.nextInt());
-        
-        
-        int product = list.stream().filter(x -> list.contains(2020 - x))
-                                   .reduce(1, (x, y) -> x * y);
+        int product = numbers.stream()
+                             .map(Integer::parseInt)
+                             .filter(x -> numbers.contains(String.valueOf((2020 - x))) )
+                             .reduce(1, (x, y) -> x * y);
 
         System.out.println(product);
     }

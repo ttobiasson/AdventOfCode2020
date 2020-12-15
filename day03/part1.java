@@ -1,41 +1,23 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Iterator;
+//https://adventofcode.com/2020/day/3
 public class part1 {
-    public static void main(String... args) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("input.txt"));
-        ArrayList<ArrayList<Character>> list = new ArrayList<ArrayList<Character>>();
-        ArrayList<Character>row;
+    public static void main(String... args) throws IOException {
+        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        printTrees(iter);
+    }
+    private static void printTrees(Iterator<String> iter) {
         int count = 0;
-        int rowSize, listSize;
-
-        while(sc.hasNextLine()){
-            row = new ArrayList<Character>();
-            char[] arr = sc.nextLine().toCharArray();
-            for(char c : arr)
-                row.add(c);
-            list.add(row);
-            
-        }
-        rowSize = list.get(0).size();
-        listSize = list.size();
         int j = 3;
-        
-        for(int i = 1; i < listSize; i++){
-                
-            j = j >= rowSize ? j-rowSize : j;
-                
-            count += list.get(i).get(j).equals('#') ? 1 : 0;
-            
+        iter.next();
+        while(iter.hasNext()){
+            String line = iter.next();
+            j = j >= line.length() ? j-line.length() : j;
+            count += line.charAt(j) == '#' ? 1 : 0;
             j+=3;
-        }
-
+        }   
         System.out.println(count);
-
-
-
-
     }
 }

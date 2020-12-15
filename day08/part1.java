@@ -3,11 +3,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
-
+//https://adventofcode.com/2020/day/8
 public class part1 {
     public static void main(String... args) throws IOException {
         List<String> lines = Files.readAllLines(Path.of("input.txt"));
         HashSet<Integer>hs = new HashSet<Integer>();
+        printAccumulatorValue(lines, hs);
+    }
+    private static void printAccumulatorValue(List<String> lines, HashSet<Integer> hs) {
         int index = 0;
         int acc = 0;
         while(true){

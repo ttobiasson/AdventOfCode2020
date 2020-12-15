@@ -1,51 +1,33 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+//https://adventofcode.com/2020/day/3
 public class part2 {
-    public static void main(String... args) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("input.txt"));
-        ArrayList<ArrayList<Character>> list = new ArrayList<ArrayList<Character>>();
-        ArrayList<Character>row;
-        int count = 0;
-        int trueCount = 1;
+    public static void main(String... args) throws IOException {
+        List<String>lines = Files.readAllLines(Path.of("input.txt"));
+        int totalCount = 1;
         int rowSize, listSize;
         int[] steps = new int[]{1,1,3,1,5,1,7,1,1,2};
 
-        while(sc.hasNextLine()){
-            row = new ArrayList<Character>();
-            char[] arr = sc.nextLine().toCharArray();
-            for(char c : arr)
-                row.add(c);
-            list.add(row);
-            
-        }
-        rowSize = list.get(0).size();
-        listSize = list.size();
-        int j = 1;
-        int i = 1;
+        rowSize = lines.get(0).length();
+        listSize = lines.size();
 
         for(int s = 0; s < steps.length-1; s+=2){
-            j = steps[s];
-            i = steps[s+1];
-            count = 0;
+            int j = steps[s];
+            int i = steps[s+1];
+            int count = 0;
 
             while(i < listSize){
-                                
                 j = j >= rowSize ? j-rowSize : j;
                 
-                count += list.get(i).get(j).equals('#') ? 1 : 0;
+                count += lines.get(i).charAt(j) == '#' ? 1 : 0;
             
                 j += steps[s];
                 i += steps[s+1];
            }
-           trueCount *= count;
+           totalCount *= count;
         }
-        System.out.println(trueCount);
-
-
-
-
+        System.out.println(totalCount);
     }
 }

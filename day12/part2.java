@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
-
+//https://adventofcode.com/2020/day/12
 public class part2 {
     static final int NORTH = 3;
     static final int WEST = 2;
