@@ -8,9 +8,15 @@ public class part2 {
     static int count = 0;
     public static void main(String... args) throws IOException {
 
-        List<String> strList = Files.readAllLines(Path.of("input.txt"));
-        List<List<String>>lines = new ArrayList<List<String>>();
+        List<String> lines = Files.readAllLines(Path.of("input.txt"));
+        List<List<String>>newLines = new ArrayList<List<String>>();
 
+        modifyLines(lines, newLines);
+
+        int ans = check(newLines, "shiny gold")-1;
+        System.out.println(ans);
+    }
+    private static void modifyLines(List<String> strList, List<List<String>> lines) {
         for(String str : strList){
             String[] line = str.substring(0, str.length()-1).replaceAll(" contain", ",").split(",");
             var list = new ArrayList<String>();
@@ -18,9 +24,6 @@ public class part2 {
                 list.add(s.trim());
             lines.add(list);
         }
-
-        int ans = check(lines, "shiny gold")-1;
-        System.out.println(ans);
     }
     static int check(List<List<String>>list, String bagToCheck){
 

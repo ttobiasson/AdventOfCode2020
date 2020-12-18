@@ -7,7 +7,11 @@ import java.util.Iterator;
 //https://adventofcode.com/2020/day/6
 public class part2 {
     public static void main(String... args) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
+        printEverybodysYesses(iter);
+    }
+
+    private static void printEverybodysYesses(Iterator<String> iter) {
         final ArrayList<String>strings = new ArrayList<String>();
         final HashSet<Character> hs = new HashSet<Character>();
         long count = 0;

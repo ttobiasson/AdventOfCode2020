@@ -6,12 +6,15 @@ import java.util.stream.Collectors;
 //https://adventofcode.com/2020/day/10
 public class part2 {
     public static void main(String... args) throws IOException {
-        List<Integer >numbers = Files.readAllLines(Path.of("input.txt"))
-                                     .stream()
+        List<Integer >numbers = Files.lines(Path.of("input.txt"))
                                      .map(Integer::valueOf)
                                      .sorted()
                                      .collect(Collectors.toList());
 
+        printNumberOfWaysToConnectAdapters(numbers);
+    }
+
+    private static void printNumberOfWaysToConnectAdapters(List<Integer> numbers) {
         int max = numbers.stream()
                          .mapToInt(i -> i)
                          .max()
@@ -23,7 +26,7 @@ public class part2 {
         System.out.println(ans);
     }
 
-    static long permutations(List<Integer>list){
+    private static long permutations(List<Integer>list){
         long ans = 1;
         int ones = 1;
 
@@ -36,7 +39,7 @@ public class part2 {
         }    
         return ans;
     }
-    static long sequence(int n){
+    private static long sequence(int n){
         if(n >= 3)
             return sequence(n-1) + sequence(n-2) + sequence(n-3);
         if(n == 2)

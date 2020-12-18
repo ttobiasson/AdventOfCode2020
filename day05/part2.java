@@ -7,7 +7,11 @@ import java.util.stream.IntStream;
 
 public class part2 {
     public static void main(String... args) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
+        printMySeatID(iter);
+    }
+
+    private static void printMySeatID(Iterator<String> iter) {
         ArrayList<Integer>list = new ArrayList<Integer>();
 
         while(iter.hasNext()){

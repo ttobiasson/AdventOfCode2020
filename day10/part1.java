@@ -6,11 +6,14 @@ import java.util.stream.Collectors;
 public class part1 {
     
     public static void main(String... args) throws IOException {
-        List<Integer >numbers = Files.readAllLines(Path.of("input.txt"))
-                                     .stream()
+        List<Integer >numbers = Files.lines(Path.of("input.txt"))
                                      .map(Integer::valueOf)
                                      .sorted()
                                      .collect(Collectors.toList());
+        printOnesTimesThrees(numbers);
+    }
+
+    private static void printOnesTimesThrees(List<Integer> numbers) {
         int one  = 1;
         int three = 1;
 

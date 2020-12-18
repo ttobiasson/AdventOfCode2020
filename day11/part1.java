@@ -7,10 +7,13 @@ import java.util.List;
 public class part1 {
     public static void main(String... args) throws IOException {
         List<String>lines = Files.readAllLines(Path.of("input.txt"));
-        List<String>newLines = calc(lines);
+        List<String>newLines = makeSeatTakenOrFree(lines);
+        printTakenSeats(newLines);
+    }
+    private static void printTakenSeats(List<String> newLines) {
         int prev = 1;
         while(true){
-            newLines = calc(newLines);
+            newLines = makeSeatTakenOrFree(newLines);
             int seats = getTotalNumberOfOccupiedSeats(newLines);
             
             if(seats == prev){
@@ -20,7 +23,7 @@ public class part1 {
             prev = seats;
         }
     }
-    static List<String> calc(List<String>lines){
+    private static List<String> makeSeatTakenOrFree(List<String>lines){
         List<String>newLines = new ArrayList<String>();
 
         for(int i = 0; i < lines.size(); i++){
@@ -40,7 +43,7 @@ public class part1 {
         }
         return newLines;
     }
-    static int getOccupiedSeats(List<String>lines, int index, int jndex){
+    private static int getOccupiedSeats(List<String>lines, int index, int jndex){
         int count = 0;
         int lineLength = lines.get(index).length();
         int matrixSize = lines.size();
@@ -56,7 +59,7 @@ public class part1 {
             }
         return count;
     }
-    static int getTotalNumberOfOccupiedSeats(List<String>lines){
+    private static int getTotalNumberOfOccupiedSeats(List<String>lines){
         int count = 0;
         for(int i = 0; i < lines.size(); i++){
             for(int j = 0; j < lines.get(i).length(); j++){

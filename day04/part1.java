@@ -5,7 +5,7 @@ import java.util.Iterator;
 //https://adventofcode.com/2020/day/4
 public class part1 {
     public static void main(String... ags) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
         printValidPassports(iter);
     }
     private static void printValidPassports(Iterator<String> iter) {

@@ -10,10 +10,10 @@ import java.util.List;
 //https://adventofcode.com/2020/day/14
 public class part1 {
     public static void main(String... args) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
         readlines(iter);
     }
-    static void readlines(Iterator<String>iter){
+    private static void readlines(Iterator<String>iter){
         HashMap<Integer, Long>memory = new HashMap<Integer, Long>();
         BigInteger sum = BigInteger.ZERO;
         String mask = "";

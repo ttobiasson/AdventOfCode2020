@@ -8,23 +8,29 @@ public class part1 {
     static int count = 0;
     public static void main(String... args) throws IOException {
  
-        List<String> strList = Files.readAllLines(Path.of("input.txt"));
-        List<List<String>>lines = new ArrayList<List<String>>();
+        List<String> lines = Files.readAllLines(Path.of("input.txt"));
+        List<List<String>>newLines = new ArrayList<List<String>>();
 
+        modifyEachLine(lines, newLines);
+
+        printBagCount(lines, newLines);
+        
+
+    }
+    private static void printBagCount(List<String> lines, List<List<String>> newLines) {
+        for(int i = 0; i < lines.size(); i++)
+            check(newLines, newLines.get(i).get(0));
+        System.out.println(count);
+    }
+    private static void modifyEachLine(List<String> strList, List<List<String>> lines) {
         for(String str : strList){
             var list = new ArrayList<String>();
             for(String s : getString(str))
                 list.add(s);
             lines.add(list);
         }
-
-        for(int i = 0; i < lines.size(); i++)
-            check(lines, lines.get(i).get(0));
-        System.out.println(count);
-        
-
     }
-    static void check(List<List<String>>list, String b){
+    private static void check(List<List<String>>list, String b){
         String bagToCheck = b.trim();
         String target = "shiny gold";
         int counted = count;
@@ -45,9 +51,7 @@ public class part1 {
 
 
     }
-    
-    
-    static String[] getString(String line){
+    private static String[] getString(String line){
 
         String[] values =  line.substring(0, line.length()-1)
                             .replaceAll("contain", "")

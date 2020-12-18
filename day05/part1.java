@@ -5,7 +5,11 @@ import java.util.Iterator;
 //https://adventofcode.com/2020/day/5
 public class part1 {
     public static void main(String... args) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
+        printSeatID(iter);
+    }
+
+    private static void printSeatID(Iterator<String> iter) {
         int max = 0;
         while(iter.hasNext()){
             char[] line = iter.next().toCharArray();

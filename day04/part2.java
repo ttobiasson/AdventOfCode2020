@@ -6,9 +6,8 @@ import java.util.Iterator;
 //https://adventofcode.com/2020/day/4
 public class part2 {
     public static void main(String... ags) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
         printValidPasswords(iter);
-        
     }
     private static void printValidPasswords(Iterator<String> iter) {
         String[] strings = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"};

@@ -7,6 +7,10 @@ public class part1 {
     public static void main(String... args) throws IOException {
         List<String>lines = Files.readAllLines(Path.of("input.txt"));
 
+        printEarliestTimestamp(lines);
+    }
+
+    private static void printEarliestTimestamp(List<String> lines) {
         String a = lines.get(0);
         String b = lines.get(1);
         

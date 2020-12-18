@@ -8,12 +8,16 @@ import java.util.List;
 public class part2 {
     public static void main(String... args) throws IOException {
         List<String>lines = Files.readAllLines(Path.of("input.txt"));
-        List<String>newLines = calc(lines);
+        List<String>newLines = makeSeatTakenOrFree(lines);
         
+        printTakenSeats(newLines);
+    }
+
+    private static void printTakenSeats(List<String> newLines) {
         long prev = 1;
 
         while(true){
-            newLines = calc(newLines);
+            newLines = makeSeatTakenOrFree(newLines);
             long seats = getTotalNumberOfOccupiedSeats(newLines);
             if(seats == prev){
                 System.out.println(seats);
@@ -23,7 +27,7 @@ public class part2 {
         }
     }
 
-    static List<String> calc(List<String>lines){
+    private static List<String> makeSeatTakenOrFree(List<String>lines){
         List<String>newLines = new ArrayList<String>();
 
         for(int i = 0; i < lines.size(); i++){
@@ -44,7 +48,7 @@ public class part2 {
         }
         return newLines;
     }
-    static int getOccupiedSeats(List<String>lines, int index, int jndex){
+    private static int getOccupiedSeats(List<String>lines, int index, int jndex){
         int count = 0;
         HashSet<ArrayList<Integer>> coords = getFirstVisibleSeatCoordinates(lines, index, jndex);
 
@@ -55,10 +59,9 @@ public class part2 {
                 count++;
             }
         }
-        
         return count;
     }
-    static long getTotalNumberOfOccupiedSeats(List<String>lines){
+    private static long getTotalNumberOfOccupiedSeats(List<String>lines){
         int count = 0;
                                 
         for(int i = 0; i < lines.size(); i++){
@@ -69,7 +72,7 @@ public class part2 {
         }
         return count;
     }
-    static HashSet<ArrayList<Integer>> getFirstVisibleSeatCoordinates(List<String>lines, int index, int jndex){
+    private static HashSet<ArrayList<Integer>> getFirstVisibleSeatCoordinates(List<String>lines, int index, int jndex){
         
         HashSet<ArrayList<Integer>>coordinateList = new HashSet<ArrayList<Integer>>();
         ArrayList<Integer>firstSeatCoordinates = new ArrayList<Integer>();

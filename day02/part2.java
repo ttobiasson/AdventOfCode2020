@@ -5,7 +5,7 @@ import java.util.*;
 //https://adventofcode.com/2020/day/2
 public class part2 {
     public static void main(String[] arg) throws IOException {
-        Iterator<String>iter = Files.readAllLines(Path.of("input.txt")).iterator();
+        Iterator<String>iter = Files.lines(Path.of("input.txt")).iterator();
         getValidPasswords(iter);
     }
     private static void getValidPasswords(Iterator<String> iter) {
